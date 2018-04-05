@@ -36,6 +36,7 @@ import com.google.android.exoplayer2.ExoPlayer;
 import com.google.android.exoplayer2.ExoPlayerFactory;
 import com.google.android.exoplayer2.LoadControl;
 import com.google.android.exoplayer2.PlaybackParameters;
+import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.Timeline;
 import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
@@ -52,7 +53,7 @@ import com.google.android.exoplayer2.util.Util;
 import java.util.ArrayList;
 
 // COMPLETED (1): Have this Activity implement ExoPlayer.EventListener and add the required methods.
-public class QuizActivity extends AppCompatActivity implements View.OnClickListener, ExoPlayer.EventListener {
+public class QuizActivity extends AppCompatActivity implements View.OnClickListener, Player.EventListener {
 
     private static final int CORRECT_ANSWER_DELAY_MILLIS = 1000;
     private static final String REMAINING_SONGS_KEY = "remaining_songs";
@@ -290,20 +291,20 @@ public class QuizActivity extends AppCompatActivity implements View.OnClickListe
     public void onPlayerStateChanged(boolean playWhenReady, int playbackState) {
         String state = null;
         switch (playbackState) {
-            case ExoPlayer.STATE_IDLE:
+            case Player.STATE_IDLE:
                 state = "STATE_IDLE";
                 break;
-            case ExoPlayer.STATE_BUFFERING:
+            case Player.STATE_BUFFERING:
                 state = "STATE_BUFFERING";
                 break;
-            case ExoPlayer.STATE_READY:
+            case Player.STATE_READY:
                 state = "STATE_READY";
                 break;
-            case ExoPlayer.STATE_ENDED:
+            case Player.STATE_ENDED:
                 state = "STATE_ENDED";
                 break;
         }
-        Log.d(TAG, String.format("onPlayerStateChanged(%d, %s)"));
+        Log.d(TAG, String.format("onPlayerStateChanged(%s, %s)", playWhenReady, playbackState));
     }
 
     @Override
